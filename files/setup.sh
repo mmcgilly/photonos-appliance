@@ -62,7 +62,9 @@ Name=e*
 Address=${IP_ADDRESS}/${NETMASK}
 Gateway=${GATEWAY}
 DNS=${DNS_SERVER}
-Domain=${DNS_DOMAIN}
+Domains=${DNS_DOMAIN}
+LinkLocalAddressing=no
+IPv6AcceptRA=no
 __CUSTOMIZE_PHOTON__
 
     echo -e "\e[92mConfiguring hostname ..." > /dev/console
@@ -71,6 +73,10 @@ __CUSTOMIZE_PHOTON__
     echo -e "\e[92mRestarting Network ..." > /dev/console
     systemctl restart systemd-networkd
     fi
+
+    echo -e "\e[92mAllowing ping through firewall ..." > /dev/console
+    echo "iptables -A INPUT -p icmp -j ACCEPT" >> /etc/systemd/scripts/iptables
+    systemctl restart iptables
 
     echo -e "\e[92mConfiguring root password ..." > /dev/console
     ROOT_PASSWORD=$(echo "${ROOT_PASSWORD_PROPERTY}" | awk -F 'oe:value="' '{print $2}' | awk -F '"' '{print $1}')

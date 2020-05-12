@@ -9,9 +9,9 @@
     {
       "type": "vmware-iso",
       "vm_name": "{{ user `vm_name` }}",
-      "guest_os_type": "Other",
+      "guest_os_type": "vmware-photon-64",
       "version": "13",
-      "disk_size": "12288",
+      "disk_size": "8192",
       "boot_command": [
         "<esc><wait>",
         "vmlinuz initrd=initrd.img root=/dev/ram0 loglevel=3 ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/photon-kickstart.json photon.media=cdrom",
