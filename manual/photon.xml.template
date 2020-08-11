@@ -35,6 +35,10 @@
             <Label>Root Password</Label>
             <Description>Password to login in as root. Please use a secure password</Description>
         </Property>
+        <Property ovf:key="guestinfo.ssh_authorized_keys" ovf:password="true" ovf:type="string" ovf:userConfigurable="true" ovf:value="">
+            <Label>Root ssh_authorized_keys</Label>
+            <Description>SSH Public Keys to insert into /root/.ssh/authorozed_keys</Description>
+        </Property>
         <Category>zDebug</Category>
         <Property ovf:key="guestinfo.debug" ovf:type="boolean" ovf:userConfigurable="true" ovf:value="false">
             <Label>Debugging</Label>

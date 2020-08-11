@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "PhotonOS Appliance",
   "vm_name": "PhotonOS_Appliance",
   "iso_checksum": "b061877005730011d7b6dfd649d36b5366bb3109",

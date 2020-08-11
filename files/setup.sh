@@ -29,6 +29,7 @@ else
     DNS_SERVER_PROPERTY=$(vmtoolsd --cmd "info-get guestinfo.ovfEnv" | grep "guestinfo.dns")
     DNS_DOMAIN_PROPERTY=$(vmtoolsd --cmd "info-get guestinfo.ovfEnv" | grep "guestinfo.domain")
     ROOT_PASSWORD_PROPERTY=$(vmtoolsd --cmd "info-get guestinfo.ovfEnv" | grep "guestinfo.root_password")
+    ROOT_SSHKEYS_PROPERTY=$(vmtoolsd --cmd "info-get guestinfo.ovfEnv" | grep "guestinfo.ssh_authorized_keys")
 
     ##################################
     ### No User Input, assume DHCP ###
@@ -81,6 +82,10 @@ __CUSTOMIZE_PHOTON__
     echo -e "\e[92mConfiguring root password ..." > /dev/console
     ROOT_PASSWORD=$(echo "${ROOT_PASSWORD_PROPERTY}" | awk -F 'oe:value="' '{print $2}' | awk -F '"' '{print $1}')
     echo "root:${ROOT_PASSWORD}" | /usr/sbin/chpasswd
+
+    echo -e "\e[92mAdding root ssh_authorized_keys ..." > /dev/console
+    ROOT_SSHKEYS=$(echo "${ROOT_SSHKEYS_PROPERTY}" | awk -F 'oe:value="' '{print $2}' | awk -F '"' '{print $1}')
+    echo "${ROOT_SSHKEYS}" >> /root/.ssh/authorized_keys
 
     # Ensure we don't run customization again
     touch /root/ran_customization
